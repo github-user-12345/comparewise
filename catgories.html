@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompareWise - Categories</title>
+    <style>
+        :root {
+            --primary-color: #0077b6;
+            --secondary-color: #005f8a;
+            --highlight-color: #ffcc00;
+            --text-color: white;
+            --background-color: #f4f4f4;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            text-align: center;
+        }
+
+        /* Navbar */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--primary-color);
+            padding: 15px 20px;
+            color: var(--text-color);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--highlight-color);
+        }
+
+        /* Search Bar */
+        .search-bar {
+            margin: 20px auto;
+            width: 50%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-bar input {
+            width: 80%;
+            padding: 10px;
+            border: 2px solid var(--primary-color);
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Categories Grid */
+        .categories-container {
+            max-width: 1100px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+
+        .category-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--text-color);
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--highlight-color);
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .search-bar {
+                width: 80%;
+            }
+            .categories-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="nav-container">
+            <h1 class="logo">CompareWise</h1>
+            <nav class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="compare.html">Compare</a>
+                <a href="#">Categories</a>
+                <a href="price-tracker.html">Price Tracker</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="Search categories..." onkeyup="filterCategories()">
+    </div>
+
+    <!-- Categories Grid -->
+    <div class="categories-container" id="categoriesGrid">
+        <div class="category-card" onclick="navigateTo('mobile.html')">
+            <img src="https://source.unsplash.com/100x100/?smartphone" alt="Smartphones">
+            <h3>Smartphones</h3>
+        </div>
+        
+        <div class="category-card" onclick="navigateTo('laptops.html')">
+            <img src="https://source.unsplash.com/100x100/?laptop" alt="Laptops">
+            <h3>Laptops</h3>
+        </div>
+
+        <div class="category-card" onclick="navigateTo('audio.html')">
+            <img src="https://source.unsplash.com/100x100/?headphones" alt="Audio Devices">
+            <h3>Audio Devices</h3>
+        </div>
+
+        <div class="category-card" onclick="navigateTo('pc-components.html')">
+            <img src="https://source.unsplash.com/100x100/?computer" alt="PC Components">
+            <h3>PC Components</h3>
+        </div>
+
+        <div class="category-card" onclick="navigateTo('accessories.html')">
+            <img src="https://source.unsplash.com/100x100/?mouse" alt="Accessories">
+            <h3>Accessories</h3>
+        </div>
+
+        <div class="category-card" onclick="navigateTo('gaming.html')">
+            <img src="https://source.unsplash.com/100x100/?gaming" alt="Gaming">
+            <h3>Gaming</h3>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
+            <a href="#">FAQ</a>
+        </div>
+        <p>&copy; 2025 CompareWise. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function filterCategories() {
+            let input = document.getElementById("search").value.toLowerCase();
+            let cards = document.querySelectorAll(".category-card");
+
+            cards.forEach(card => {
+                let text = card.innerText.toLowerCase();
+                if (text.includes(input)) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+
+</body>
+</html>

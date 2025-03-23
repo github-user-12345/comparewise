@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CompareWise - Product Comparison</title>
+  </head>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+
+    /* Header */
+    header {
+      background: #0077b6;
+      color: white;
+      padding: 15px 20px;
+    }
+
+    /* Navigation Container */
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+    }
+
+    /* Logo */
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* Desktop Navbar */
+    .nav-menu {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+
+    .nav-menu a:hover {
+      color: #ffcc00;
+    }
+
+    /* Hamburger Button */
+    .hamburger {
+      display: none;
+      font-size: 28px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Responsive Navbar */
+    @media screen and (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+
+      .nav-menu {
+        display: none; /* Default hidden */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #0077b6;
+        padding: 10px 0;
+        text-align: center;
+        transition: 0.3s ease-in-out;
+      }
+
+      .nav-menu a {
+        display: block;
+        padding: 12px;
+      }
+
+      /* Ensure it appears when the menu is open */
+      .nav-menu.open {
+        display: flex;
+      }
+    }
+
+    /* Search Bar */
+    .search-bar {
+      margin: 20px auto;
+      width: 50%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .search-bar input {
+      width: 80%;
+      padding: 10px;
+      border: 2px solid #0077b6;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .breaking-news {
+      background: #00c853; /* Green label stays fixed */
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      height: 40px; /* Fixed height for uniform look */
+      display: flex;
+      align-items: center;
+    }
+
+    .breaking-news-wrapper {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .breaking-news-content {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scrollText 10s linear infinite;
+      color: white;
+      font-size: 18px;
+    }
+
+    @keyframes scrollText {
+      from {
+        transform: translateX(100%);
+      }
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    button {
+      position: relative;
+      display: inline-block;
+      margin: 15px;
+      padding: 15px 30px;
+      text-align: center;
+      font-size: 18px;
+      letter-spacing: 1px;
+      text-decoration: none;
+      color: #725ac1;
+      background: transparent;
+      cursor: pointer;
+      transition: ease-out 0.5s;
+      border: 2px solid #725ac1;
+      border-radius: 10px;
+      box-shadow: inset 0 0 0 0 #725ac1;
+    }
+
+    button:hover {
+      color: white;
+      box-shadow: inset 0 -100px 0 0 #725ac1;
+    }
+
+    button:active {
+      transform: scale(0.9);
+    }
+
+    .featured-comparison {
+      margin: 40px 0;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .comparison-cards {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      width: 300px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .best-value-products {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 40px 0;
+    }
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    .category {
+      width: 120px;
+      text-align: center;
+    }
+    .category img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      transition: 0.3s;
+    }
+    .category img:hover {
+      transform: scale(1.1);
+    }
+    .comparision-table,
+    .price-history {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 40px 0;
+    }
+    /* Footer Styling */
+    .footer {
+      background: #0077b6; /* Same color as navbar */
+      color: white;
+      padding: 20px;
+      margin-top: 50px;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #ffcc00;
+      text-decoration: none;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <body>
+    <header>
+      <div class="nav-container">
+        <h1 class="logo">CompareWise</h1>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+        <nav class="nav-menu">
+          <a href="trialcode.html" onclick="closeMenu()">Home</a>
+          <a href="compare.html" onclick="closeMenu()">Compare</a>
+          <a href="catgories.html" onclick="closeMenu()">Categories</a>
+          <a href="intermediateprice.html" onclick="closeMenu()"
+            >Price Tracker</a
+          >
+          <a href="#" onclick="closeMenu()">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="search-bar">
+      <input
+        type="text"
+        id="search"
+        placeholder="Search products..."
+        onkeyup="filterProducts()"
+      />
+    </div>
+
+    <div class="breaking-news">
+      <div class="breaking-news-wrapper">
+        <div class="breaking-news-content">
+          🔥 Best Price Drop Alert: iPhone 14 now ₹65,999 (down from ₹79,999) 🔥
+        </div>
+      </div>
+    </div>
+
+    <div class="featured-comparison">FEATURED COMPARISON</div>
+    <div class="comparison-cards">
+      <div class="card">
+        <img src="images/16.png" alt="iPhone 16 Pro Max" width="300" />
+
+        <h3>APPLE 16 PRO MAX</h3>
+        <p>🔥 A18 Pro Chip</p>
+        <p>📱 6.9" OLED, Titanium</p>
+        <p>📷 48MP Triple Camera, 4K 120fps</p>
+        <button onclick="window.location.href='iphone16promax.html'">
+          Read More
+        </button>
+      </div>
+      <div class="card">
+        <img src="images/s25.png" alt="Samsung S25 Ultra" width="300" />
+        <h3>SAMSUNG S25 ULTRA</h3>
+        <p>🔥 Snapdragon 8 Elite</p>
+        <p>📱 6.9" AMOLED, 120Hz</p>
+        <p>📷 200MP, 50MP Periscope</p>
+        <button onclick="window.location.href='samsungs25.html'">
+          Read More
+        </button>
+      </div>
+    </div>
+    <button onclick="window.location.href='comparision.html'">
+      Compare Both
+    </button>
+    <div class="best-value-products">BEST VALUE PRODUCTS</div>
+
+    <div class="categories">
+      <div class="category">
+        <img src="images/phone.png" alt="Mobile" />
+        <p>Mobile</p>
+      </div>
+      <div class="category">
+        <img src="images/laptop.png" alt="Laptop" />
+        <p>Laptop</p>
+      </div>
+      <div class="category">
+        <img src="images/pc.png" alt="PC" />
+        <p>PC</p>
+      </div>
+      <div class="category">
+        <img src="images/heaadphone.png" alt="Headphones" />
+        <p>Headphones</p>
+      </div>
+      <div class="category">
+        <img src="images/th.png" alt="Mouse" />
+        <p>Mouse</p>
+      </div>
+      <div class="category">
+        <img src="images/OIP.png" alt="Keyboard" />
+        <p>Keyboard</p>
+      </div>
+    </div>
+
+    <div class="buttons-container">
+      <button class="btn" onclick="window.location.href='Compare.html'">
+        📊 Comparison Table
+      </button>
+
+      <button
+        class="btn"
+        onclick="window.location.href='intermediateprice.html'"
+      >
+        📉 Price History
+      </button>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="#">Contact Us</a>
+          <a href="#">FAQ</a>
+        </div>
+        <p>&copy; 2025 CompareWise</p>
+      </div>
+    </footer>
+  </body>
+</html>
+<script>
+  function filterProducts() {
+    let input = document.getElementById("search").value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+
+    function toggleMenu() {
+      const navMenu = document.querySelector(".nav-menu");
+      const isOpen = navMenu.classList.contains("open");
+
+      if (isOpen) {
+        navMenu.style.display = "none"; // Hide when clicking again
+      } else {
+        navMenu.style.display = "flex"; // Show when clicking
+      }
+
+      navMenu.classList.toggle("open");
+    }
+
+    function closeMenu() {
+      if (window.innerWidth <= 768) {
+        document.querySelector(".nav-menu").style.display = "none";
+        document.querySelector(".nav-menu").classList.remove("open");
+      }
+    }
+
+    cards.forEach((card) => {
+      let text = card.innerText.toLowerCase();
+      if (text.includes(input)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+</script>

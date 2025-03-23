@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CompareWise - Accessories</title>
+    <style>
+      :root {
+        --primary-color: #0077b6;
+        --secondary-color: #005f8a;
+        --highlight-color: #ffcc00;
+        --text-color: white;
+        --background-color: #f4f4f4;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--background-color);
+        text-align: center;
+      }
+
+      /* Navbar */
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--primary-color);
+        padding: 15px 20px;
+        color: var(--text-color);
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-menu a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 18px;
+        transition: 0.3s;
+      }
+
+      .nav-menu a:hover {
+        color: var(--highlight-color);
+      }
+
+      /* Search Bar */
+      .search-bar {
+        margin: 20px auto;
+        width: 50%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .search-bar input {
+        width: 80%;
+        padding: 10px;
+        border: 2px solid var(--primary-color);
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      /* Accessories Grid */
+      .accessories-container {
+        max-width: 1100px;
+        margin: 30px auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 10px;
+      }
+
+      .accessory-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+
+      .accessory-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .accessory-card img {
+        width: 150px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--primary-color);
+        color: var(--text-color);
+        padding: 20px;
+        margin-top: 50px;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .footer-links a {
+        color: var(--highlight-color);
+        text-decoration: none;
+        font-size: 16px;
+        transition: 0.3s;
+      }
+
+      .footer-links a:hover {
+        text-decoration: underline;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .search-bar {
+          width: 80%;
+        }
+        .accessories-container {
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <div class="nav-container">
+        <h1 class="logo">CompareWise</h1>
+        <nav class="nav-menu">
+          <a href="index.html">Home</a>
+          <a href="compare.html">Compare</a>
+          <a href="categories.html">Categories</a>
+          <a href="price-tracker.html">Price Tracker</a>
+          <a href="#">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <input
+        type="text"
+        id="search"
+        placeholder="Search accessories..."
+        onkeyup="filterAccessories()"
+      />
+    </div>
+
+    <!-- Accessories Grid -->
+    <div class="accessories-container" id="accessoriesGrid">
+      <div class="accessory-card" onclick="navigateTo('logitech-mx.html')">
+        <img
+          src="https://source.unsplash.com/150x150/?mouse"
+          alt="Logitech MX Master 3S"
+        />
+        <h3>Logitech MX Master 3S</h3>
+        <p>₹9,999</p>
+      </div>
+
+      <div class="accessory-card" onclick="navigateTo('apple-keyboard.html')">
+        <img
+          src="https://source.unsplash.com/150x150/?keyboard"
+          alt="Apple Magic Keyboard"
+        />
+        <h3>Apple Magic Keyboard</h3>
+        <p>₹12,499</p>
+      </div>
+
+      <div class="accessory-card" onclick="navigateTo('anker-powerbank.html')">
+        <img
+          src="https://source.unsplash.com/150x150/?powerbank"
+          alt="Anker 20,000mAh Power Bank"
+        />
+        <h3>Anker 20,000mAh Power Bank</h3>
+        <p>₹3,499</p>
+      </div>
+
+      <div class="accessory-card" onclick="navigateTo('samsung-ssd.html')">
+        <img
+          src="https://source.unsplash.com/150x150/?ssd"
+          alt="Samsung T7 1TB SSD"
+        />
+        <h3>Samsung T7 1TB SSD</h3>
+        <p>₹9,999</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+        <a href="#">FAQ</a>
+      </div>
+      <p>&copy; 2025 CompareWise. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      function filterAccessories() {
+        let input = document.getElementById("search").value.toLowerCase();
+        let cards = document.querySelectorAll(".accessory-card");
+
+        cards.forEach((card) => {
+          let text = card.innerText.toLowerCase();
+          if (text.includes(input)) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+
+      function navigateTo(page) {
+        window.location.href = page;
+      }
+    </script>
+  </body>
+</html>

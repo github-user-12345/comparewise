@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompareWise - Samsung S25 Ultra</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #0077b6;
+            --secondary-color: #005f8a;
+            --highlight-color: #ffcc00;
+            --text-color: white;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        /* Navbar */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--primary-color);
+            padding: 15px 20px;
+            color: var(--text-color);
+        }
+
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 18px;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--highlight-color);
+        }
+
+        /* Product Overview */
+        .product-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-container img {
+            width: 300px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Centered Frame for Specs, Reviews, FAQs, and Price Table */
+        .info-frame {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .tab-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .tab-content {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .active {
+            display: block;
+        }
+
+        /* Price Table Styling */
+        .price-table h3 {
+            color: #0077b6;
+            font-size: 24px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            text-align: center;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        th {
+            background: #0077b6;
+            color: white;
+        }
+
+        td {
+            background: #f8f9fa;
+        }
+
+        td a {
+            text-decoration: none;
+            color: white;
+            background: #0077b6;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        td a:hover {
+            background: #005f8a;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--text-color);
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--highlight-color);
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="nav-container">
+            <h1 class="logo">CompareWise</h1>
+            <nav class="nav-menu">
+                <a href="trialcode.html">Home</a>
+                <a href="compare.html">Compare</a>
+                <a href="#">Categories</a>
+                <a href="intermediateprice.html">Price Tracker</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Product Overview -->
+    <section class="product-container">
+        <img src="images/s25.png" alt="Samsung S25 Ultra">
+        <h2>Samsung S25 Ultra</h2>
+        <p>The Samsung S25 Ultra features a powerful Snapdragon 8 Elite processor, a stunning 6.9" AMOLED 120Hz display, and a cutting-edge 200MP camera with 8K video recording.</p>
+        <h3>Price: ₹1,39,999</h3>
+        <button class="tab-btn" onclick="alert('Redirecting to Purchase Page!')">🛒 Buy Now</button>
+    </section>
+
+    <!-- Centralized Info Frame -->
+    <div class="info-frame">
+        <div class="tabs">
+            <button class="tab-btn" onclick="showTab('specs')">📊 Specifications</button>
+            <button class="tab-btn" onclick="showTab('reviews')">🌟 User Reviews</button>
+            <button class="tab-btn" onclick="showTab('faq')">❓ FAQs</button>
+            <button class="tab-btn" onclick="showTab('price')">💰 Price Comparison</button>
+        </div>
+
+        <div id="specs" class="tab-content active">
+            <h3>📊 Full Specifications:</h3>
+            <ul>
+                <li>📺 6.9" AMOLED 120Hz Display</li>
+                <li>⚡ Snapdragon 8 Elite</li>
+                <li>🎮 12GB RAM, 256GB/512GB/1TB Storage</li>
+                <li>📷 200MP + 50MP Periscope + 12MP Ultrawide</li>
+                <li>🔋 5,000mAh Battery</li>
+                <li>🔌 USB-C, Wi-Fi 7, 5G</li>
+            </ul>
+        </div>
+
+        <div id="reviews" class="tab-content">
+            <h3>🌟 User Reviews:</h3>
+            <p>"One of the best Samsung devices with a fantastic camera!" - ⭐⭐⭐⭐⭐</p>
+        </div>
+
+        <div id="faq" class="tab-content">
+            <h3>❓ Frequently Asked Questions:</h3>
+            <p><strong>Q: Does it support 8K video recording?</strong><br>Yes, the Samsung S25 Ultra supports 8K video recording.</p>
+        </div>
+
+        <div id="price" class="tab-content">
+            <h3>📊 Live Price Comparison</h3>
+            <table>
+                <tr><th>Website</th><th>Price (₹)</th><th>Buy Now</th></tr>
+                <tr><td>Amazon</td><td>₹1,39,999</td><td><a href="#">Buy</a></td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompareWise - iPhone 16 Pro Max</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary-color: #0077b6;
+            --secondary-color: #005f8a;
+            --highlight-color: #ffcc00;
+            --text-color: white;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        /* Navbar */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--primary-color);
+            padding: 15px 20px;
+            color: var(--text-color);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--highlight-color);
+        }
+
+        /* Product Section */
+        .product-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-container img {
+            width: 300px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .tab-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn:hover {
+            background: var(--secondary-color);
+        }
+
+        .tab-content {
+            display: none;
+            text-align: left;
+            padding: 20px;
+        }
+
+        .active {
+            display: block;
+        }
+
+        /* Rating System */
+        .stars {
+            font-size: 24px;
+            color: #ffcc00;
+            cursor: pointer;
+        }
+
+        .stars span:hover,
+        .stars span:hover ~ span {
+            color: #ffa500;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: var(--text-color);
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--highlight-color);
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        /* Price Table Styling */
+.price-table {
+    max-width: 800px;
+    margin: 40px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.price-table h3 {
+    color: #0077b6;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    text-align: center;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    font-size: 16px;
+}
+
+th {
+    background: #0077b6;
+    color: white;
+}
+
+td {
+    background: #f8f9fa;
+}
+
+td a {
+    text-decoration: none;
+    color: white;
+    background: #0077b6;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+td a:hover {
+    background: #005f8a;
+}
+/* New Centered Frame for Tabs */
+.info-frame {
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure Only the Active Tab is Visible */
+.tab-content {
+    display: none;
+    text-align: center; 
+    padding: 20px;
+}
+
+/* Ensure First Tab is Shown by Default */
+.tab-content.active {
+    display: block;
+}
+
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .price-table {
+        width: 95%;
+        padding: 15px;
+    }
+
+    th, td {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    td a {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="nav-container">
+            <h1 class="logo">CompareWise</h1>
+            <nav class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="comparision.html">Compare</a>
+                <a href="#">Categories</a>
+                <a href="intermediateprice.html">Price Tracker</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Product Overview -->
+    <section class="product-container">
+        <img src="images/16.png" alt="iPhone 16 Pro Max">
+        <h2>iPhone 16 Pro Max</h2>
+        <p>The iPhone 16 Pro Max features Apple's A18 Pro chip, a 6.9" OLED 120Hz display, a titanium build, and a powerful 48MP triple-camera system.</p>
+        <h3>Price: ₹1,49,999</h3>
+        <button class="tab-btn" onclick="alert('Redirecting to Purchase Page!')">🛒 Buy Now</button>
+    </section>
+
+    <!-- Tab Navigation -->
+    <div class="info-frame">
+        <div class="tabs">
+            <button class="tab-btn" onclick="showTab('specs')">📊 Specifications</button>
+            <button class="tab-btn" onclick="showTab('reviews')">🌟 User Reviews</button>
+            <button class="tab-btn" onclick="showTab('faq')">❓ FAQs</button>
+        </div>
+    
+        <div id="specs" class="tab-content active">
+            <h3>📊 Full Specifications:</h3>
+            <ul>
+                <li> 6.9" OLED 120Hz Display</li>
+                <li> A18 Pro Chip</li>
+                <li> 8GB RAM, 128GB/256GB/512GB/1TB Storage</li>
+                <li> 48MP + 12MP Ultrawide + 12MP Telephoto</li>
+                <li> 4,685mAh Battery</li>
+                <li> USB-C, Wi-Fi 7, 5G</li>
+            </ul>
+        </div>
+    
+        <div id="reviews" class="tab-content">
+            <h3>🌟 User Reviews:</h3>
+            <p>"The best iPhone ever! Super fast and an amazing camera!" - ⭐⭐⭐⭐⭐</p>
+            <p>"Love the titanium build and the battery life is fantastic!" - ⭐⭐⭐⭐☆</p>
+            <p>"A bit expensive, but totally worth it!" - ⭐⭐⭐⭐⭐</p>
+        </div>
+    
+        <div id="faq" class="tab-content">
+            <h3>❓ Frequently Asked Questions:</h3>
+            <p><strong>Q: Does it support 8K video recording?</strong><br>Yes, the iPhone 16 Pro Max supports 8K at 30fps.</p>
+        </div>
+    </div>
+<!-- Price Comparison Table -->
+<section class="price-table">
+    <h3>📊 Live Price Comparison</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Website</th>
+                <th>Price (₹)</th>
+                <th>Buy Now</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Amazon</td>
+                <td id="amazon-price">₹1,49,999</td>
+                <td><a href="https://www.amazon.in/dp/B0XXXXXX" target="_blank">🛒 Buy on Amazon</a></td>
+            </tr>
+            <tr>
+                <td>Flipkart</td>
+                <td id="flipkart-price">₹1,47,999</td>
+                <td><a href="https://www.flipkart.com/product/p/XXXXXXX" target="_blank">🛒 Buy on Flipkart</a></td>
+            </tr>
+            <tr>
+                <td>Croma</td>
+                <td id="croma-price">₹1,48,999</td>
+                <td><a href="https://www.croma.com/product-id" target="_blank">🛒 Buy on Croma</a></td>
+            </tr>
+            <tr>
+                <td>Reliance Digital</td>
+                <td id="reliance-price">₹1,46,999</td>
+                <td><a href="https://www.reliancedigital.in/product/XXXXXXX" target="_blank">🛒 Buy on Reliance Digital</a></td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
+            <a href="#">FAQ</a>
+        </div>
+        <p>&copy; 2025 CompareWise. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+        }
+    </script>
+
+</body>
+</html>

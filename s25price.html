@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompareWise - Samsung S25 Ultra Price History</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root { --primary-color: #0077b6; --secondary-color: #005f8a; --highlight-color: #ffcc00; --text-color: white; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; text-align: center; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; background: var(--primary-color); padding: 15px 20px; color: var(--text-color); }
+        .logo { font-size: 24px; font-weight: bold; }
+        .nav-menu a { color: var(--text-color); text-decoration: none; font-size: 18px; margin: 0 15px; transition: 0.3s; }
+        .nav-menu a:hover { color: var(--highlight-color); }
+        .product-intro { max-width: 800px; margin: 40px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); }
+        .product-intro img { width: 200px; border-radius: 10px; margin-bottom: 10px; }
+        .chart-container { max-width: 700px; margin: 40px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); }
+        .price-history-container { max-width: 600px; margin: 20px auto; background: white; padding: 15px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); }
+        table { width: 100%; border-collapse: collapse; background: white; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        th { background: var(--primary-color); color: var(--text-color); }
+        .footer { background: var(--primary-color); color: var(--text-color); padding: 20px; margin-top: 50px; }
+        .footer-links { display: flex; justify-content: center; gap: 20px; }
+        .footer-links a { color: var(--highlight-color); text-decoration: none; font-size: 16px; transition: 0.3s; }
+        .footer-links a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <h1 class="logo">CompareWise</h1>
+            <nav class="nav-menu">
+                <a href="trialcode.html">Home</a>
+                <a href="compare.html">Compare</a>
+                <a href="#">Categories</a>
+                <a href="intermediateprice.html">Price Tracker</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="product-intro">
+        <img src="https://source.unsplash.com/200x200/?samsung" alt="Samsung S25 Ultra">
+        <h2>Samsung S25 Ultra</h2>
+        <p>Samsung's latest flagship with Snapdragon 8 Elite, 6.9" AMOLED 120Hz display, and a 200MP camera.</p>
+    </section>
+
+    <div class="chart-container">
+        <h3>📈 Price History (Last 5 Months)</h3>
+        <canvas id="priceChart"></canvas>
+    </div>
+
+    <div class="price-history-container">
+        <h3>📅 Price Changes</h3>
+        <table>
+            <thead><tr><th>Month</th><th>Price (₹)</th></tr></thead>
+            <tbody>
+                <tr><td>Nov 2023</td><td>₹1,49,999</td></tr>
+                <tr><td>Dec 2023</td><td>₹1,44,999</td></tr>
+                <tr><td>Jan 2024</td><td>₹1,39,999</td></tr>
+                <tr><td>Feb 2024</td><td>₹1,34,999</td></tr>
+                <tr><td>Mar 2024</td><td>₹1,39,999</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
+            <a href="#">FAQ</a>
+        </div>
+        <p>&copy; 2025 CompareWise. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const ctx = document.getElementById('priceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["Nov 2023", "Dec 2023", "Jan 2024", "Feb 2024", "Mar 2024"],
+                datasets: [{
+                    label: 'Price (₹)',
+                    data: [149999, 144999, 139999, 134999, 139999],
+                    borderColor: '#0077b6',
+                    backgroundColor: 'rgba(0, 119, 182, 0.2)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            }
+        });
+    </script>
+
+</body>
+</html>

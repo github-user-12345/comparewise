@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Products</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: #0077b6;
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        main {
+            margin-top: 20px;
+        }
+                /* Navbar */
+                .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--primary-color);
+            padding: 15px 20px;
+            color: var(--text-color);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--highlight-color);
+        }
+
+        /* Form Styling */
+        form {
+            background: white;
+            padding: 20px;
+            display: inline-block;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        select, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #0077b6;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 12px 20px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #005f8a;
+        }
+
+        /* Table Styling */
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        /* Highlight Differences */
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <h1 class="logo">CompareWise</h1>
+            <nav class="nav-menu">
+                <a href="trialcode.html">Home</a>
+                <a href="compare.html">Compare</a>
+                <a href="#">Categories</a>
+                <a href="intermediateprice.html">Price Tracker</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="content">
+        <!-- Product Selection Form -->
+        <form id="compareForm">
+            <label for="product1">Choose First Product:</label>
+            <select id="product1" required>
+                <option value="" disabled selected>Select a product</option>
+                <option value="iphone16">Apple iPhone 16 Pro Max</option>
+                <option value="s25ultra">Samsung S25 Ultra</option>
+                <option value="oneplus12">OnePlus 12</option>
+                <option value="pixel8pro">Google Pixel 8 Pro</option>
+                <option value="xiaomi14ultra">Xiaomi 14 Ultra</option>
+            </select>
+
+            <label for="product2">Choose Second Product:</label>
+            <select id="product2" required>
+                <option value="" disabled selected>Select a product</option>
+                <option value="iphone16">Apple iPhone 16 Pro Max</option>
+                <option value="s25ultra">Samsung S25 Ultra</option>
+                <option value="oneplus12">OnePlus 12</option>
+                <option value="pixel8pro">Google Pixel 8 Pro</option>
+                <option value="xiaomi14ultra">Xiaomi 14 Ultra</option>
+            </select>
+
+            <button type="submit">Compare</button>
+        </form>
+    </main>
+
+    <script>
+        document.getElementById("compareForm").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+
+            let product1 = document.getElementById("product1").value;
+            let product2 = document.getElementById("product2").value;
+
+            if (product1 === product2) {
+                alert("Please select two different products.");
+                return;
+            }
+
+            displayComparison(product1, product2);
+        });
+
+        // Product Details
+        const productDetails = {
+            iphone16: { name: "Apple iPhone 16 Pro Max", specs: { display: "6.9'' OLED", processor: "A18 Pro", camera: "48MP Triple", battery: "4685mAh" } },
+            s25ultra: { name: "Samsung S25 Ultra", specs: { display: "6.9'' AMOLED", processor: "Snapdragon 8 Elite", camera: "200MP", battery: "5000mAh" } },
+            oneplus12: { name: "OnePlus 12", specs: { display: "6.7'' AMOLED", processor: "Snapdragon 8 Gen 3", camera: "50MP", battery: "5400mAh" } },
+            pixel8pro: { name: "Google Pixel 8 Pro", specs: { display: "6.8'' OLED", processor: "Tensor G3", camera: "50MP", battery: "5050mAh" } },
+            xiaomi14ultra: { name: "Xiaomi 14 Ultra", specs: { display: "6.7'' AMOLED", processor: "Snapdragon 8 Gen 3", camera: "50MP Quad", battery: "5300mAh" } }
+        };
+
+        // Display Product Comparison
+        function displayComparison(prod1, prod2) {
+            let product1 = productDetails[prod1];
+            let product2 = productDetails[prod2];
+
+            if (!product1 || !product2) {
+                document.getElementById("content").innerHTML = "<p>Invalid products selected.</p>";
+                return;
+            }
+
+            let tableHTML = `
+                <h2>Comparison Between ${product1.name} and ${product2.name}</h2>
+                <table border="1">
+                    <tr>
+                        <th>Feature</th>
+                        <th>${product1.name}</th>
+                        <th>${product2.name}</th>
+                    </tr>`;
+
+            Object.keys(product1.specs).forEach(feature => {
+                let value1 = product1.specs[feature];
+                let value2 = product2.specs[feature];
+                let highlight = value1 !== value2 ? "highlight" : "";
+
+                tableHTML += `
+                <tr>
+                    <td>${feature.charAt(0).toUpperCase() + feature.slice(1)}</td>
+                    <td class="${highlight}">${value1}</td>
+                    <td class="${highlight}">${value2}</td>
+                </tr>`;
+            });
+
+            tableHTML += `</table>
+                          <button onclick="window.location.reload()">Compare Again</button>`;
+
+            document.getElementById("content").innerHTML = tableHTML;
+        }
+    </script>
+
+</body>
+</html>

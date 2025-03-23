@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompareWise - Dynamic Comparison</title>
+    <style>
+        :root {
+            --primary-color: #0077b6;
+            --highlight-color: #ffcc00;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+        }
+
+        main {
+            margin-top: 20px;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--primary-color);
+            padding: 15px 20px;
+            color: var(--text-color);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--highlight-color);
+        }
+
+        /* Selection Form */
+        .compare-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            display: inline-block;
+        }
+
+        select, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 12px 20px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #005f8a;
+        }
+
+        /* Table Styling */
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* Highlight Differences */
+        .highlight {
+            background-color: var(--highlight-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <h1 class="logo">CompareWise</h1>
+            <nav class="nav-menu">
+                <a href="trialcode.html">Home</a>
+                <a href="compare.html">Compare</a>
+                <a href="#">Categories</a>
+                <a href="intermediateprice.html">Price Tracker</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <main id="content">
+        <!-- Product Selection Form -->
+        <form id="compareForm" class="compare-form">
+            <label for="product1">Choose First Product:</label>
+            <select id="product1" required>
+                <option value="" disabled selected>Select a product</option>
+            </select>
+
+            <label for="product2">Choose Second Product:</label>
+            <select id="product2" required>
+                <option value="" disabled selected>Select a product</option>
+            </select>
+
+            <button type="submit">Compare</button>
+        </form>
+    </main>
+
+    <div class="buttons">
+        <button id="highlightBtn" onclick="highlightDifferences()" disabled>Highlight Differences</button>
+    </div>
+
+    <script>
+        // Define product specifications
+        const productDetails = {
+    iphone16: { 
+        name: "Apple iPhone 16 Pro Max", 
+        specs: { 
+            Display: "6.9'' OLED", 
+            RefreshRate: "120Hz",
+            Processor: "A18 Pro", 
+            Camera: "48MP Triple", 
+            Battery: "4685mAh", 
+            Storage: "256GB / 512GB / 1TB",
+            OS: "iOS 18",
+            Weight: "240g",
+            WaterResistance: "IP68",
+            ChargingSpeed: "25W Wired, 15W MagSafe",
+            Connectivity: "Wi-Fi 7, Bluetooth 5.3, 5G",
+            Biometrics: "Face ID",
+            BuildMaterial: "Titanium Frame"
+        } 
+    },
+    s25ultra: { 
+        name: "Samsung S25 Ultra", 
+        specs: { 
+            Display: "6.9'' AMOLED", 
+            RefreshRate: "120Hz",
+            Processor: "Snapdragon 8 Elite", 
+            Camera: "200MP + 50MP Periscope", 
+            Battery: "5000mAh", 
+            Storage: "256GB / 512GB / 1TB",
+            OS: "Android 15 (One UI 7)",
+            Weight: "228g",
+            WaterResistance: "IP68",
+            ChargingSpeed: "45W Wired, 15W Wireless",
+            Connectivity: "Wi-Fi 7, Bluetooth 5.3, 5G",
+            Biometrics: "Ultrasonic Fingerprint",
+            BuildMaterial: "Armor Aluminum Frame"
+        } 
+    },
+    oneplus12: { 
+        name: "OnePlus 12", 
+        specs: { 
+            Display: "6.7'' AMOLED", 
+            RefreshRate: "120Hz",
+            Processor: "Snapdragon 8 Gen 3", 
+            Camera: "50MP", 
+            Battery: "5400mAh", 
+            Storage: "256GB / 512GB",
+            OS: "Android 14 (OxygenOS 14)",
+            Weight: "210g",
+            WaterResistance: "IP65",
+            ChargingSpeed: "80W Wired, 50W Wireless",
+            Connectivity: "Wi-Fi 6E, Bluetooth 5.3, 5G",
+            Biometrics: "In-display Fingerprint",
+            BuildMaterial: "Glass & Aluminum Frame"
+        } 
+    },
+    pixel8pro: { 
+        name: "Google Pixel 8 Pro", 
+        specs: { 
+            Display: "6.8'' OLED", 
+            RefreshRate: "120Hz",
+            Processor: "Tensor G3", 
+            Camera: "50MP", 
+            Battery: "5050mAh", 
+            Storage: "128GB / 256GB / 512GB",
+            OS: "Android 15 (Stock)",
+            Weight: "213g",
+            WaterResistance: "IP68",
+            ChargingSpeed: "30W Wired, 23W Wireless",
+            Connectivity: "Wi-Fi 7, Bluetooth 5.3, 5G",
+            Biometrics: "Face Unlock + Fingerprint",
+            BuildMaterial: "Aluminum & Glass"
+        } 
+    },
+    xiaomi14ultra: { 
+        name: "Xiaomi 14 Ultra", 
+        specs: { 
+            Display: "6.7'' AMOLED", 
+            RefreshRate: "120Hz",
+            Processor: "Snapdragon 8 Gen 3", 
+            Camera: "50MP Quad", 
+            Battery: "5300mAh", 
+            Storage: "256GB / 512GB / 1TB",
+            OS: "Android 14 (HyperOS)",
+            Weight: "219g",
+            WaterResistance: "IP68",
+            ChargingSpeed: "90W Wired, 50W Wireless",
+            Connectivity: "Wi-Fi 7, Bluetooth 5.3, 5G",
+            Biometrics: "In-display Fingerprint",
+            BuildMaterial: "Ceramic & Aluminum Frame"
+        } 
+    }
+};
+
+        // Populate dropdowns dynamically
+        function populateDropdowns() {
+            let select1 = document.getElementById("product1");
+            let select2 = document.getElementById("product2");
+
+            for (let key in productDetails) {
+                let option1 = new Option(productDetails[key].name, key);
+                let option2 = new Option(productDetails[key].name, key);
+                select1.add(option1);
+                select2.add(option2);
+            }
+        }
+
+        populateDropdowns();
+
+        // Handle form submission
+        document.getElementById("compareForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let product1Key = document.getElementById("product1").value;
+            let product2Key = document.getElementById("product2").value;
+
+            if (product1Key === product2Key) {
+                alert("Please select two different products.");
+                return;
+            }
+
+            displayComparison(product1Key, product2Key);
+        });
+
+        // Display selected products
+        function displayComparison(prod1, prod2) {
+            let product1 = productDetails[prod1];
+            let product2 = productDetails[prod2];
+
+            let tableHTML = `<table border="1">
+                <tr>
+                    <th>Feature</th>
+                    <th>${product1.name}</th>
+                    <th>${product2.name}</th>
+                </tr>`;
+
+            Object.keys(product1.specs).forEach(feature => {
+                let value1 = product1.specs[feature];
+                let value2 = product2.specs[feature];
+
+                tableHTML += `
+                <tr>
+                    <td>${feature}</td>
+                    <td class="compare" data-feature="${feature}">${value1}</td>
+                    <td class="compare" data-feature="${feature}">${value2}</td>
+                </tr>`;
+            });
+
+            tableHTML += `</table>`;
+            document.getElementById("content").innerHTML = tableHTML;
+            document.getElementById("highlightBtn").disabled = false;
+        }
+
+        let highlighted = false; // Track highlight state
+
+        // Function to highlight differences
+        function highlightDifferences() {
+            let rows = document.querySelectorAll(".compare");
+            let groupedByFeature = {};
+
+            // Group values by feature
+            rows.forEach(cell => {
+                let feature = cell.getAttribute("data-feature");
+                if (!groupedByFeature[feature]) {
+                    groupedByFeature[feature] = [];
+                }
+                groupedByFeature[feature].push(cell);
+            });
+
+            // Toggle highlight mode
+            Object.values(groupedByFeature).forEach(cells => {
+                if (cells[0].innerText !== cells[1].innerText) {
+                    cells.forEach(cell => cell.classList.toggle("highlight", !highlighted));
+                }
+            });
+
+            // Update button text
+            highlighted = !highlighted;
+            document.getElementById("highlightBtn").innerText = highlighted ? "Remove Highlights" : "Highlight Differences";
+        }
+    </script>
+
+</body>
+</html>

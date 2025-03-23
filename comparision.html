@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompareWise - Comparison Table</title>
+    <style>
+        :root {
+            --primary-color: #0077b6;
+            --secondary-color: #005f8a;
+            --highlight-color: #ffcc00;
+            --text-color: white;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+
+        /* Navbar */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--primary-color);
+            padding: 15px 20px;
+            color: var(--text-color);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--highlight-color);
+        }
+
+        /* Search Bar */
+        .search-bar {
+            margin: 20px auto;
+            width: 50%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-bar input {
+            width: 80%;
+            padding: 10px;
+            border: 2px solid var(--primary-color);
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+       /* Comparison Table */
+.comparison-table-container {
+    max-width: 90%;
+    margin: 40px auto;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+}
+
+th {
+    background: #0077b6;
+    color: white;
+}
+
+/* Default styles for similar and different values */
+.diff {
+    background: white;
+    font-weight: bold;
+}
+
+.similar {
+    background: #f0f0f0;
+    color: black;
+}
+
+/* Highlight differences when the button is toggled */
+.highlight-diff .diff {
+    background: #ffcc00;
+    color: black;
+}
+
+/* Toggle Button */
+.toggle-btn {
+    margin: 20px;
+    padding: 10px 20px;
+    background: #0077b6;
+    color: white;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.toggle-btn:hover {
+    background: #005f8a;
+}
+
+        .footer {
+            background: var(--primary-color);
+            color: var(--text-color);
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: var(--highlight-color);
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div class="nav-container">
+            <h1 class="logo">CompareWise</h1>
+            <nav class="nav-menu">
+                <a href="trialcode.html">Home</a>
+                <a href="compare.html">Compare</a>
+                <a href="#">Categories</a>
+                <a href="intermediateprice.html">Price Tracker</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <input type="text" id="search" placeholder="Search for a product...">
+    </div>
+
+
+    <div class="comparison-table-container">
+        <button class="toggle-btn" onclick="toggleDifferences()">🔍 Highlight Differences</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>iPhone 16 Pro Max</th>
+                    <th>Samsung S25 Ultra</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Display Size</td>
+                    <td class="similar">6.9" OLED</td>
+                    <td class="similar">6.9" AMOLED</td>
+                </tr>
+                <tr>
+                    <td>Refresh Rate</td>
+                    <td class="similar">120Hz</td>
+                    <td class="similar">120Hz</td>
+                </tr>
+                <tr>
+                    <td>Processor</td>
+                    <td class="diff">A18 Pro</td>
+                    <td class="diff">Snapdragon 8 Elite</td>
+                </tr>
+                <tr>
+                    <td>RAM</td>
+                    <td class="diff">8GB LPDDR5X</td>
+                    <td class="diff">12GB LPDDR5X</td>
+                </tr>
+                <tr>
+                    <td>Storage Options</td>
+                    <td class="similar">128GB, 256GB, 512GB, 1TB</td>
+                    <td class="similar">128GB, 256GB, 512GB, 1TB</td>
+                </tr>
+                <tr>
+                    <td>Primary Camera</td>
+                    <td class="diff">48MP Triple Camera</td>
+                    <td class="diff">200MP + 50MP Periscope</td>
+                </tr>
+                <tr>
+                    <td>Battery Capacity</td>
+                    <td class="diff">4,685mAh</td>
+                    <td class="diff">5,000mAh</td>
+                </tr>
+                <tr>
+                    <td>Operating System</td>
+                    <td class="similar">iOS 18</td>
+                    <td class="similar">Android 15 (One UI 7)</td>
+                </tr>
+                <tr>
+                    <td>Water Resistance</td>
+                    <td class="similar">IP68</td>
+                    <td class="similar">IP68</td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td class="diff">₹1,49,999</td>
+                    <td class="diff">₹1,39,999</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
+            <a href="#">FAQ</a>
+        </div>
+        <p>&copy; 2025 CompareWise. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function toggleDifferences() {
+            let rows = document.querySelectorAll("tbody tr");
+
+            rows.forEach(row => {
+                let columns = row.querySelectorAll("td");
+                if (columns.length === 3) {
+                    if (columns[1].textContent !== columns[2].textContent) {
+                        columns[1].classList.toggle("highlight");
+                        columns[2].classList.toggle("highlight");
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
+<script>
+    function toggleDifferences() {
+        document.querySelector(".comparison-table-container").classList.toggle("highlight-diff");
+    }
+</script>

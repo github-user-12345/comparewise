@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CompareWise - Product Details</title>
+    <style>
+      :root {
+        --primary-color: #0077b6;
+        --secondary-color: #005f8a;
+        --highlight-color: #ffcc00;
+        --text-color: white;
+        --background-color: #f4f4f4;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--background-color);
+        text-align: center;
+      }
+
+      /* Navbar */
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--primary-color);
+        padding: 15px 20px;
+        color: var(--text-color);
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-menu a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 18px;
+        transition: 0.3s;
+      }
+
+      .nav-menu a:hover {
+        color: var(--highlight-color);
+      }
+
+      /* Product Container */
+      .product-container {
+        max-width: 800px;
+        margin: 40px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .product-container img {
+        width: 300px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+      }
+
+      .buy-link {
+        display: inline-block;
+        margin-top: 15px;
+        background: var(--primary-color);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+
+      .buy-link:hover {
+        background: var(--secondary-color);
+      }
+
+      /* Footer */
+      .footer {
+        background: var(--primary-color);
+        color: var(--text-color);
+        padding: 20px;
+        margin-top: 50px;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .footer-links a {
+        color: var(--highlight-color);
+        text-decoration: none;
+        font-size: 16px;
+        transition: 0.3s;
+      }
+
+      .footer-links a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <div class="nav-container">
+        <h1 class="logo">CompareWise</h1>
+        <nav class="nav-menu">
+          <a href="index.html">Home</a>
+          <a href="compare.html">Compare</a>
+          <a href="categories.html">Categories</a>
+          <a href="price-tracker.html">Price Tracker</a>
+          <a href="#">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Product Details -->
+    <section class="product-container">
+      <img id="product-image" src="" alt="Product Image" />
+      <h2 id="product-name"></h2>
+      <p id="product-desc"></p>
+      <h3>Price: <span id="product-price"></span></h3>
+      <a id="buy-link" class="buy-link" href="#" target="_blank">🛒 Buy Now</a>
+
+      <h3>Specifications:</h3>
+      <ul id="product-specs"></ul>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+        <a href="#">FAQ</a>
+      </div>
+      <p>&copy; 2025 CompareWise. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+      // Phone Data
+      const phoneData = {
+        "iPhone 16 Pro Max": {
+          image: "https://source.unsplash.com/300x300/?iphone",
+          price: "₹1,49,999",
+          desc: 'Apple iPhone 16 Pro Max with A18 Pro, 6.9" OLED, and 48MP Camera.',
+          specs: [
+            '📺 6.9" OLED 120Hz Display',
+            "⚡ A18 Pro Chip",
+            "📷 48MP + 12MP + 12MP Cameras",
+            "🔋 4,685mAh Battery",
+            "🔌 USB-C, Wi-Fi 7, 5G",
+          ],
+          buyLink: "https://www.amazon.in/dp/B0XXXXXX",
+        },
+        "Samsung S25 Ultra": {
+          image: "https://source.unsplash.com/300x300/?samsung",
+          price: "₹1,39,999",
+          desc: 'Samsung S25 Ultra with Snapdragon 8 Elite, 6.9" AMOLED, and 200MP Camera.',
+          specs: [
+            '📺 6.9" AMOLED 120Hz Display',
+            "⚡ Snapdragon 8 Elite",
+            "📷 200MP + 50MP Periscope + 12MP",
+            "🔋 5,000mAh Battery",
+            "🔌 USB-C, Wi-Fi 7, 5G",
+          ],
+          buyLink: "https://www.amazon.in/dp/B0YYYYYY",
+        },
+        "Google Pixel 9 Pro": {
+          image: "https://source.unsplash.com/300x300/?pixel",
+          price: "₹1,29,999",
+          desc: 'Google Pixel 9 Pro with Tensor G4, 6.8" LTPO OLED, and 50MP Camera.',
+          specs: [
+            '📺 6.8" LTPO OLED 120Hz',
+            "⚡ Google Tensor G4",
+            "📷 50MP + 48MP + 12MP Cameras",
+            "🔋 5,050mAh Battery",
+            "🔌 USB-C, Wi-Fi 7, 5G",
+          ],
+          buyLink: "https://www.flipkart.com/product/p/XXXXXXX",
+        },
+      };
+
+      // Get phone name from URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const selectedPhone = urlParams.get("phone");
+
+      // Display phone details
+      if (phoneData[selectedPhone]) {
+        document.getElementById("product-image").src =
+          phoneData[selectedPhone].image;
+        document.getElementById("product-name").innerText = selectedPhone;
+        document.getElementById("product-desc").innerText =
+          phoneData[selectedPhone].desc;
+        document.getElementById("product-price").innerText =
+          phoneData[selectedPhone].price;
+        document.getElementById("buy-link").href =
+          phoneData[selectedPhone].buyLink;
+        document.getElementById("product-specs").innerHTML = phoneData[
+          selectedPhone
+        ].specs
+          .map((spec) => `<li>${spec}</li>`)
+          .join("");
+      } else {
+        document.querySelector(".product-container").innerHTML =
+          "<h2>Product Not Found</h2>";
+      }
+    </script>
+  </body>
+</html>
